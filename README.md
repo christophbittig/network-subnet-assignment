@@ -12,7 +12,7 @@ This script assigns subnets to requested networks based on a base CIDR network. 
 ## Usage
 
 ```python
-python subnet_assignment.py -s BASE_CIDR -j JSON_FILE -l LOCATION_CODE -c COMPANY_NAME
+python subnetting.py -s BASE_CIDR -j JSON_FILE -l LOCATION_CODE -c COMPANY_NAME
 ```
 
 
