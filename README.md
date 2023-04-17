@@ -56,8 +56,8 @@ Example JSON file:
 The script outputs the assigned subnets for each network in the following format:
 
 ```text
-192.0.1.0/24 fmc (My Company - FMC)
-192.0.2.0/24 lmc (My Company - LMC)
+192.0.1.0/24 clients (My Company - FMC)
+192.0.2.0/24 server (My Company - LMC)
 192.0.3.0/24 guest (My Company - GUEST)
 ```
 
