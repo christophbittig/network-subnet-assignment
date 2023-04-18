@@ -20,6 +20,7 @@ python subnetting.py -s BASE_CIDR -j JSON_FILE -l LOCATION_CODE -c COMPANY_NAME
 * `-j`, `--json-file`: the JSON file containing the network definitions (required)
 * `-l`, `--location-code`: a 3-character location code to use in network descriptions (required)
 * `-c`, `--company-name`: the company name to use in network descriptions (required)
+* `-o`, `--output-csv`: save the output as csv (optional)
 
 ## JSON File Format
 
