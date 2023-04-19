@@ -82,6 +82,8 @@ def output_csv(
         network_list (list): A list of dictionaries containing network definitions.
         path: The file path of the csv.
     
+    Returns:
+    None
     """
     
     # Get field names
@@ -115,6 +117,7 @@ def main():
     Returns:
     None
     """
+
     # Parse command-line arguments
     parser = argparse.ArgumentParser(
         description="Assign subnets to requested networks based on a base CIDR network."
