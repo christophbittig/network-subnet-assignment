@@ -7,7 +7,6 @@ import ipaddress
 import json
 import os
 import argparse
-from pprint import pprint
 import csv
 
 
@@ -195,7 +194,7 @@ def main():
 
     # Print the networks and their descriptions
     for network in sorted(networks, key=get_cidr):
-        pprint(
+        print(
             f"{network['network']}, {network['company_description']}, {network['location_description']}"
         )
 
