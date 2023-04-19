@@ -69,10 +69,10 @@ If provided, the output is saved to a csv file.
 
 ```python
 # Assign subnets of the base network 10.10.0.0/19
-subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany
+subnetting.py -s 192.0.2.0/24 -j net_definitions.json -l MUC -c MyCompany
 
 # Assign subnets of the base network 10.10.0.0/19 and save the output to the csv file
-subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany -o subnets.csv
+subnetting.py -s 192.0.2.0/24 -j net_definitions.json -l MUC -c MyCompany -o subnets.csv
 ```
 
 ## License
