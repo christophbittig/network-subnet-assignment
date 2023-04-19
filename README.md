@@ -61,7 +61,9 @@ The script outputs the assigned subnets for each network in the following format
 192.0.3.0/24 guest (My Company - GUEST)
 ```
 
-The network description includes the company name and location code, if provided.
+The network description includes the company name and location code.
+
+If provided, the output is saved to a csv file.
 
 ## License
 
