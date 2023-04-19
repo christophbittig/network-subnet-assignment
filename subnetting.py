@@ -83,8 +83,11 @@ def output_csv(
         path: The file path of the csv.
     
     """
+    
+    # Get field names
     keys = network_list[0].keys()
 
+    # Write data to file
     with open(path, 'w', newline='') as file:
         w = csv.DictWriter(file, keys)
         w.writeheader()
