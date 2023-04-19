@@ -15,11 +15,11 @@ This script assigns subnets to requested networks based on a base CIDR network. 
 python subnetting.py -s BASE_CIDR -j JSON_FILE -l LOCATION_CODE -c COMPANY_NAME
 ```
 
-
 * `-s`, `--base-cidr`: the base CIDR network to use (required)
 * `-j`, `--json-file`: the JSON file containing the network definitions (required)
 * `-l`, `--location-code`: a 3-character location code to use in network descriptions (required)
 * `-c`, `--company-name`: the company name to use in network descriptions (required)
+* `-o`, `--output-csv`: save the output as csv (optional)
 
 ## JSON File Format
 
@@ -49,8 +49,8 @@ Example JSON file:
         "vid": 2021
     }
 ]
-
 ```
+
 ## Output
 
 The script outputs the assigned subnets for each network in the following format:
@@ -61,7 +61,19 @@ The script outputs the assigned subnets for each network in the following format
 192.0.3.0/24 guest (My Company - GUEST)
 ```
 
-The network description includes the company name and location code, if provided.
+The network description includes the company name and location code.
+
+If provided, the output is saved to a csv file.
+
+## Example
+
+```python
+# Assign subnets of the base network 10.10.0.0/19
+subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany
+
+# Assign subnets of the base network 10.10.0.0/19 and save the output to the csv file
+subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany -o subnets.csv
+```
 
 ## License
 
