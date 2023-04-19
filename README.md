@@ -65,6 +65,16 @@ The network description includes the company name and location code.
 
 If provided, the output is saved to a csv file.
 
+## Example
+
+```python
+# Assign subnets of the base network 10.10.0.0/19
+subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany
+
+# Assign subnets of the base network 10.10.0.0/19 and save the output to the csv file
+subnetting.py -s 10.10.0.0/19 -j net_definitions.json -l MUC -c MyCompany -o subnets.csv
+```
+
 ## License
 
 This project is licensed under the terms of the MIT license.
