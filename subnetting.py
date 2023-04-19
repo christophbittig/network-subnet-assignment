@@ -1,5 +1,5 @@
 """
-This module provides a function to assign subnets to requested networks 
+This module provides a function to assign subnets to requested networks
 based on a base CIDR network.
 """
 
@@ -8,6 +8,7 @@ import json
 import os
 import argparse
 from pprint import pprint
+import csv
 
 
 def get_cidr(network: dict) -> str:
@@ -70,6 +71,26 @@ def assign_subnets(
     return networks
 
 
+def output_csv(
+        network_list: list,
+        path: str
+):
+    """
+    Saves the results to a csv file.
+
+    Args:
+        network_list (list): A list of dictionaries containing network definitions.
+        path: The file path of the csv.
+    
+    """
+    keys = network_list[0].keys()
+
+    with open(path, 'w', newline='') as file:
+        w = csv.DictWriter(file, keys)
+        w.writeheader()
+        w.writerows(network_list)
+
+
 def main():
     """
     Assign subnets to requested networks based on a base CIDR network.
@@ -84,6 +105,9 @@ def main():
     -j/--json-file: The JSON file containing the network definitions.
     -l/--location-code: The location code to use.
     -c/--company-name: The company name to use.
+
+    Optional arguments:
+    -o/--output-csv: save the output as csv.
 
     Returns:
     None
@@ -124,6 +148,14 @@ def main():
         required=True,
         help="the company name to use",
     )
+    parser.add_argument(
+        "-o",
+        "--output-csv",
+        metavar="OUTPUT_CSV",
+        type=str,
+        required=False,
+        help="the file path for csv output"
+    )
     args = parser.parse_args()
 
     # Check that the base CIDR network has a valid format
@@ -160,6 +192,10 @@ def main():
         pprint(
             f"{network['network']}, {network['company_description']}, {network['location_description']}"
         )
+
+    # Save the output as csv
+    if args.output_csv:
+        output_csv(networks, args.output_csv)
 
 
 if __name__ == "__main__":
