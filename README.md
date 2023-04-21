@@ -8,6 +8,7 @@ This script assigns subnets to requested networks based on a base CIDR network. 
 * `ipaddress` module (included in Python 3)
 * `json` module (included in Python 3)
 * `argparse` module (included in Python 3)
+* `csv` module (included in Python 3)
 
 ## Usage
 
