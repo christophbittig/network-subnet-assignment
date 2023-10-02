@@ -46,7 +46,7 @@ Example JSON file:
     },
     {
         "name": "guest-wifi",
-        "cidr": 22,
+        "cidr": 23,
         "vid": 2021
     }
 ]
@@ -57,9 +57,9 @@ Example JSON file:
 The script outputs the assigned subnets for each network in the following format:
 
 ```text
-192.0.1.0/24 clients (My Company - FMC)
-192.0.2.0/24 server (My Company - LMC)
-192.0.3.0/24 guest (My Company - GUEST)
+192.0.1.0/22 clients (My Company - server)
+192.0.2.0/22 server (My Company - clients)
+192.0.3.0/23 guest (My Company - guest-wifi)
 ```
 
 The network description includes the company name and location code.
