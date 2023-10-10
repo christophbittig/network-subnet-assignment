@@ -17,7 +17,8 @@ python subnetting.py -s BASE_CIDR -j JSON_FILE -l LOCATION_CODE -c COMPANY_NAME
 ```
 
 * `-s`, `--base-cidr`: the base CIDR network to use (required)
-* `-j`, `--json-file`: the JSON file containing the network definitions (required)
+* `-j`, `--json-file`: the JSON file containing the network definitions (either JSON or YAML required)
+* `-y`, `--yaml-file`: the JSON file containing the network definitions (either JSON or YAML required)
 * `-l`, `--location-code`: a 3-character location code to use in network descriptions (required)
 * `-c`, `--company-name`: the company name to use in network descriptions (required)
 * `-o`, `--output-csv`: save the output as csv (optional)
@@ -49,6 +50,31 @@ Example JSON file:
         "cidr": 23,
         "vid": 2021
     }
+]
+```
+
+## YAML File Format
+
+The JSON/YAML file should be an array of network objects, where each object has the following properties:
+
+* `name`: the name of the network
+* `cidr`: the size of the network in CIDR notation (e.g. `22`)
+* `vid`: the VLAN ID to use for the network
+
+Example YAML file:
+
+```yaml
+[
+- name: server
+  cidr: 22
+  vid: 2000
+- name: clients
+  cidr: 22
+  vid: 2010
+- name: guest-wifi
+  cidr: 23
+  vid: 2021
+
 ]
 ```
 
