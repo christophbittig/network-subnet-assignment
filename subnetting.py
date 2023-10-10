@@ -8,6 +8,7 @@ import json
 import os
 import argparse
 import csv
+import yaml
 
 
 def get_cidr(network: dict) -> str:
@@ -70,26 +71,23 @@ def assign_subnets(
     return networks
 
 
-def output_csv(
-        network_list: list,
-        path: str
-):
+def output_csv(network_list: list, path: str):
     """
     Saves the results to a csv file.
 
     Args:
         network_list (list): A list of dictionaries containing network definitions.
         path: The file path of the csv.
-    
+
     Returns:
     None
     """
-    
+
     # Get field names
     keys = network_list[0].keys()
 
     # Write data to file
-    with open(path, 'w', newline='') as file:
+    with open(path, "w", newline="") as file:
         w = csv.DictWriter(file, keys)
         w.writeheader()
         w.writerows(network_list)
@@ -106,7 +104,8 @@ def main():
 
     Required arguments:
     -s/--base-cidr: The base CIDR network to use.
-    -j/--json-file: The JSON file containing the network definitions.
+    -j/--json-file: The JSON file containing the network definitions (required if no YAML file is provided).
+    -y/--yaml-file: The YAML file containing the network definitions (required if no JSON file is provided).
     -l/--location-code: The location code to use.
     -c/--company-name: The company name to use.
 
@@ -134,8 +133,16 @@ def main():
         "--json-file",
         metavar="JSON_FILE",
         type=str,
-        required=True,
+        required=False,
         help="the JSON file containing the network definitions",
+    )
+    parser.add_argument(
+        "-y",
+        "--yaml-file",
+        metavar="YAML_FILE",
+        type=str,
+        required=False,
+        help="the YAML file containing the network definitions",
     )
     parser.add_argument(
         "-l",
@@ -159,7 +166,7 @@ def main():
         metavar="OUTPUT_CSV",
         type=str,
         required=False,
-        help="the file path for csv output"
+        help="the file path for csv output",
     )
     args = parser.parse_args()
 
@@ -170,9 +177,20 @@ def main():
         print("Error: invalid base CIDR network format")
         return
 
+    # Check that at least one of JSON or YAML file is specified
+    if not (args.json_file or args.yaml_file):
+        parser.error("At least one of --json-file or --yaml-file is required.")
+
+    if args.json_file and args.yaml_file:
+        parser.error("Only --json-file or --yaml-file is possible.")
+
     # Check that the JSON file exists
-    if not os.path.isfile(args.json_file):
+    if args.json_file and not os.path.isfile(args.json_file):
         print("Error: JSON file does not exist")
+        return
+    # Check that the YAML file exists
+    if args.yaml_file and not os.path.isfile(args.yaml_file):
+        print("Error: YAML file does not exist")
         return
 
     # Validate location code format
@@ -184,8 +202,12 @@ def main():
     base_cidr = ipaddress.IPv4Network(args.base_cidr)
 
     # Load the network definitions from the JSON file
-    with open(args.json_file, "r", encoding="utf-8") as loaded_file:
-        networks = json.load(loaded_file)
+    if args.json_file:
+        with open(args.json_file, "r", encoding="utf-8") as loaded_file:
+            networks = json.load(loaded_file)
+    elif args.yaml_file:
+        with open(args.yaml_file, "r", encoding="utf-8") as loaded_file:
+            networks = yaml.load(loaded_file)
 
     # Assign subnets to the networks
     networks = assign_subnets(
