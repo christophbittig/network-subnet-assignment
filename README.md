@@ -64,7 +64,6 @@ The JSON/YAML file should be an array of network objects, where each object has 
 Example YAML file:
 
 ```yaml
-[
 - name: server
   cidr: 22
   vid: 2000
@@ -74,8 +73,6 @@ Example YAML file:
 - name: guest-wifi
   cidr: 23
   vid: 2021
-
-]
 ```
 
 ## Output
